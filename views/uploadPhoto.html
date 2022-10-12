@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Upload Files</title>
+        <link
+            href="https://releases.transloadit.com/uppy/v3.0.1/uppy.min.css"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div id="drag-drop-area">
+            <script
+                type="module"
+                src="/uppyController.js"
+            ></script>
+        </div>
+        <h2>Please, press "SAVE" to save upload info!</h2>
+        <a
+            href="/save"
+            action="/save"
+            method="POST"
+            ><button>Save data</button></a
+        >
+    </body>
+</html>
