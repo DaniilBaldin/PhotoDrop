@@ -7,7 +7,7 @@ const getAlbumById: RequestHandler = async (req, res) => {
         const id = <any>req.params.id;
         console.log(id);
         const albumsById = await Metadata.getAlbumById(id);
-        res.status(200).send(albumsById);
+        res.status(200).send(albumsById[0]);
     } catch (err) {
         res.status(501).send((err as Error).message);
     }
