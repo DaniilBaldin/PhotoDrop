@@ -2,7 +2,7 @@
 
 Service for exchange photos between photographer and client based on AWS S3 service.
 
-// method: POST - https://photodrop-app-1.herokuapp.com/login - login admin user. Create new admin user.
+// method: POST - https://photodrop-app-1.herokuapp.com/signup - Create new admin user.
 {
   "login": "test",
   "password": "password"
