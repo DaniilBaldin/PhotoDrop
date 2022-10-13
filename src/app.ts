@@ -7,6 +7,7 @@ import session from 'cookie-session';
 import companion from '@uppy/companion';
 import cookieParser from 'cookie-parser';
 import crypto from 'crypto';
+import path from 'path';
 
 import adminRouter from './routes/adminRoutes';
 import photoRouter from './routes/photoRoutes';
@@ -28,7 +29,7 @@ app.use(
 app.use(bodyParser.json());
 app.use(session({ secret: 'some secrety secret' }));
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, '/public')));
 
 const options = {
     s3: {
