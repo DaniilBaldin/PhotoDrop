@@ -16,7 +16,7 @@ const uppy = new Uppy()
         },
     })
     .use(AwsS3, {
-        companionUrl: 'http://localhost:3020/companion',
+        companionUrl: 'https://photodrop-app-1.herokuapp.com/companion',
         headers: { 'Access-Control-Allow-Origin': '*' },
         companionHeaders: { 'Access-Control-Allow-Origin': 'Access - Control - Allow - Origin' },
     });
