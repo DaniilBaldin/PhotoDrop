@@ -9,7 +9,7 @@ const getAlbums = async (req: InfoRequest, res: Response) => {
         const person = <any>req.body.user;
         console.log(person);
         const albums = await Metadata.getAlbum(person);
-        res.status(200).send(albums);
+        res.status(200).send(albums[0]);
     } catch (err) {
         res.status(501).send((err as Error).message);
     }

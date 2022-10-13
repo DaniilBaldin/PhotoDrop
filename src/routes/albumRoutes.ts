@@ -10,8 +10,8 @@ import authMiddleware from '../middleware/authMiddleware';
 const albumRouter = Router();
 albumRouter.use(bodyParser.json());
 
-albumRouter.post('/albums', authMiddleware, getAlbums);
-albumRouter.post('/albums/:id', authMiddleware, getAlbumById);
+albumRouter.get('/albums', authMiddleware, getAlbums);
+albumRouter.get('/albums/:id', authMiddleware, getAlbumById);
 albumRouter.delete('/albums/:id', authMiddleware, deleteAlbumById);
 
 export default albumRouter;
