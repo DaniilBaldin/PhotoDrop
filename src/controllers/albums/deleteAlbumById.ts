@@ -19,7 +19,7 @@ const BUCKET: any = process.env.S3_BUCKET;
 const emptyS3Directory = async (prefix: string) => {
     const listParams = {
         Bucket: BUCKET,
-        Prefix: prefix, // ex. path/to/folder
+        Prefix: prefix,
     };
 
     const listedObjects = await s3.listObjectsV2(listParams).promise();
