@@ -29,7 +29,7 @@ app.use(
 app.use(bodyParser.json());
 app.use(session({ secret: 'some secrety secret' }));
 
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '../', '/public')));
 
 const options = {
     s3: {
