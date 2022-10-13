@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import session from 'express-session';
+import session from 'cookie-session';
 import companion from '@uppy/companion';
 import cookieParser from 'cookie-parser';
 import crypto from 'crypto';
@@ -26,7 +26,7 @@ app.use(
 );
 
 app.use(bodyParser.json());
-app.use(session({ secret: 'some secrety secret', resave: true, saveUninitialized: true }));
+app.use(session({ secret: 'some secrety secret' }));
 
 app.use(express.static(__dirname + '/public'));
 
