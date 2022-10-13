@@ -11,7 +11,7 @@ const admin = class Admin {
     }
 
     save() {
-        return db.execute('INSERT INTO adminUsers (user, password, dateCreated) VALUES (?, ?, ?)', [
+        return db.execute('INSERT INTO adminusers (user, password, dateCreated) VALUES (?, ?, ?)', [
             this.user,
             this.password,
             this.dateCreated,
@@ -19,7 +19,7 @@ const admin = class Admin {
     }
 
     static find(login: string, password: string) {
-        return db.execute(`SELECT * FROM adminUsers WHERE adminUsers.user = ? AND adminUsers.password = ?`, [
+        return db.execute(`SELECT * FROM adminusers WHERE adminusers.user = ? AND adminusers.password = ?`, [
             login,
             password,
         ]);
