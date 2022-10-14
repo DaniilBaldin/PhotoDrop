@@ -18,20 +18,18 @@ Service for exchange photos between photographer and client based on AWS S3 serv
 // method: POST - https://photodrop-app-1.herokuapp.com/album 
     Create new album. Admin must be authorized. 
 
-
 // method: GET - https://photodrop-app-1.herokuapp.com/albums 
     Get all albums in JSON format. Admin must be authorized. 
 
-// method: POST - https://photodrop-app-1.herokuapp.com/albums 
-    Returns all albums, owned by user in JSON format. Admin must be authorized. 
-    Return albums based on album user({"user": "user"} in JSON body(example)).
-
 // method: GET - https://photodrop-app-1.herokuapp.com/albums/<album_id> 
-    Get album by album id in JSON format. Admin must be authorized. 
-    Return album data in JSON format(id, photo_id, album_id, album_user, photo_url, date)).
+    Get album by album id in JSON format. Admin must be authorized.
+
+// method: PUT - https://photodrop-app-1.herokuapp.com/album
+    Update album by album id in JSON format. Admin must be authorized. 
+    Json params (id, album_logo?, album_name?, album_location?, date?) 
 
 // method: DELETE - https://photodrop-app-1.herokuapp.com/albums/<album_id> 
-    Delete album by album id. Also deletes album from AWS S3. Admin must be authorized. 
+    Delete album by album id. Admin must be authorized. 
     
     
                 PHOTO    
