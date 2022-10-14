@@ -1,7 +1,7 @@
 import { Response } from 'express';
 
 import Admin from '../../models/adminUsers';
-import generateJWT from '../../utils/generateJWT';
+// import generateJWT from '../../utils/generateJWT';
 
 import InfoRequest from '../../interface/albumsInterface';
 

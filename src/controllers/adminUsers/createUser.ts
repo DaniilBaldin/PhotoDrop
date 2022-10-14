@@ -7,7 +7,7 @@ const createUser: RequestHandler = async (req, res) => {
         const { login, password } = req.body;
         const dateCreated = new Date().toISOString();
         await Admin.save(login, password, dateCreated);
-        res.status(201).send('Created!');
+        res.status(201).json({ message: 'User created!' });
     } catch (err) {
         res.send((err as Error).message);
     }

@@ -12,7 +12,6 @@ const loginUser: RequestHandler = async (req, res) => {
             return res.status(404).json({ logged: false, message: 'User not found. Invalid Login or Password.' });
         }
         const token = generateJWT({ id: person[0].id });
-        console.log();
         return res.json({
             logged: true,
             token,

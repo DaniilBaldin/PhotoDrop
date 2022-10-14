@@ -20,7 +20,7 @@ const app = express();
 
 app.use(
     cors({
-        methods: ['OPTIONS', 'GET', 'POST', 'PATCH', 'PUT'],
+        methods: ['OPTIONS', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type', 'Authorization', 'Uppy-Versions', 'Accept', 'Access-Control-Allow-Origin'],
         exposedHeaders: ['Access-Control-Allow-Headers'],
     })
@@ -59,6 +59,10 @@ app.use('/companion', companionApp);
 const server = app.listen(3020);
 
 companion.socket(server);
+
+app.get('/', (req, res) => {
+    res.send('Hello there, General Kenobi!');
+});
 
 app.use(express.json());
 app.use(cookieParser());

@@ -15,7 +15,7 @@ const updateAlbum = async (req: InfoRequest, res: Response) => {
         const album_location = req.body.album_location ?? updateAlbum.album_location;
         const date = new Date(req.body.date).toISOString();
         await Albums.updateAlbum(album_logo, album_name, album_location, date, id, person_id);
-        res.status(200).send('Updated');
+        res.status(200).json({ message: 'Updated!' });
     } catch (err) {
         res.status(501).send((err as Error).message);
     }
