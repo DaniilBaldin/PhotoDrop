@@ -10,10 +10,11 @@ const loginUser: RequestHandler = async (req, res) => {
         const person = JSON.parse(JSON.stringify(result[0]));
         console.log(person[0]);
         if (person[0] === undefined) {
-            return res.status(404).json({ message: 'User not found. Invalid Login or password.' });
+            return res.status(404).json({ logged: false, message: 'User not found. Invalid Login or password.' });
         }
         const token = generateJWT({ login });
         return res.json({
+            logged: true,
             token,
             user: {
                 person_id: person[0].id,
