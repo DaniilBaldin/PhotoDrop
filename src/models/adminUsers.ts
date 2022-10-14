@@ -1,20 +1,30 @@
 import db from '../utils/databaseConnect';
 
 const admin = class Admin {
+    id: number;
     user: string;
     password: string;
     dateCreated: string;
-    constructor(user: string, password: string, dateCreated: string) {
+    constructor(id: number, user: string, password: string, dateCreated: string) {
+        this.id = id;
         this.user = user;
         this.password = password;
         this.dateCreated = dateCreated;
     }
 
-    save() {
+    // save() {
+    //     return db.execute('INSERT INTO adminusers (user, password, dateCreated) VALUES (?, ?, ?)', [
+    //         this.user,
+    //         this.password,
+    //         this.dateCreated,
+    //     ]);
+    // }
+
+    static save(user: string, password: string, dateCreated: string) {
         return db.execute('INSERT INTO adminusers (user, password, dateCreated) VALUES (?, ?, ?)', [
-            this.user,
-            this.password,
-            this.dateCreated,
+            user,
+            password,
+            dateCreated,
         ]);
     }
 
@@ -23,6 +33,10 @@ const admin = class Admin {
             login,
             password,
         ]);
+    }
+
+    static findOne(id: number) {
+        return db.execute(`SELECT * FROM adminusers WHERE adminusers.id = ?`, [id]);
     }
 };
 

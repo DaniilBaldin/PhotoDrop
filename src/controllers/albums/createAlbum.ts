@@ -7,11 +7,11 @@ import InfoRequest from '../../interface/albumsInterface';
 const createAlbum = async (req: InfoRequest, res: Response) => {
     try {
         const { album_name, album_location } = req.body;
-        const person_id = req.person.id;
+        const person_id = req.person.id as any;
         const date = new Date(req.body.date).toISOString();
-        console.log(album_name, album_location, date, person_id);
         await Albums.saveAlbum(album_name, album_location, date, person_id);
-        res.status(200).send('Saved!');
+        const album = await Albums.getAlbum(person_id, album_name, date);
+        res.status(200).send(album[0]);
     } catch (err) {
         res.status(501).send((err as Error).message);
     }

@@ -36,8 +36,15 @@ const albums = class Albums {
         return db.execute(`SELECT * FROM albums WHERE albums.person_id = ?`, [person_id]);
     }
 
-    static getAlbumById(album_id: string, person_id: number) {
-        return db.execute(`SELECT * FROM albums WHERE albums.id = ? AND albums.person_id = ?`, [album_id, person_id]);
+    static getAlbum(person_id: number, album_name: string, date: string) {
+        return db.execute(
+            `SELECT * FROM albums WHERE albums.person_id = ? AND albums.album_name = ? and albums.date = ?`,
+            [person_id, album_name, date]
+        );
+    }
+
+    static getAlbumById(id: number, person_id: number) {
+        return db.execute(`SELECT * FROM albums WHERE albums.id = ? AND albums.person_id = ?`, [id, person_id]);
     }
 
     static updateAlbum(

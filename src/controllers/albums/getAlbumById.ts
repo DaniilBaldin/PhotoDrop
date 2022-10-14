@@ -5,7 +5,7 @@ import Albums from '../../models/albums';
 import InfoRequest from '../../interface/albumsInterface';
 const getAlbumById = async (req: InfoRequest, res: Response) => {
     try {
-        const id = req.params.id;
+        const id = req.params.id as any;
         const person_id = req.person.id;
         const albumsById = await Albums.getAlbumById(id, person_id);
         res.status(200).send(albumsById[0]);
