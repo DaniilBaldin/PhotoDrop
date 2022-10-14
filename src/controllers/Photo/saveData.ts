@@ -13,8 +13,8 @@ const saveData: RequestHandler = (req, res) => {
         const album_user = e.user;
         const photo_url = e.photo_url;
         const dateCreated = e.date;
-        const metadata = new Metadata(photo_id, album_id, album_user, photo_url, dateCreated);
-        await metadata.save();
+        // const metadata = new Metadata(photo_id, album_id, album_user, photo_url, dateCreated);
+        // await metadata.save();
     });
     res.redirect('/upload');
 };

@@ -8,11 +8,11 @@ const loginUser: RequestHandler = async (req, res) => {
         const { login, password } = req.body;
         const result = await Admin.find(login, password);
         const person = JSON.parse(JSON.stringify(result[0]));
-        console.log(person[0]);
         if (person[0] === undefined) {
-            return res.status(404).json({ logged: false, message: 'User not found. Invalid Login or password.' });
+            return res.status(404).json({ logged: false, message: 'User not found. Invalid Login or Password.' });
         }
-        const token = generateJWT({ login });
+        const token = generateJWT({ id: person[0].id });
+        console.log();
         return res.json({
             logged: true,
             token,

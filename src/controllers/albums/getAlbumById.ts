@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { RequestHandler } from 'express';
-import Metadata from '../../models/metadata';
+import { Response } from 'express';
+import Albums from '../../models/albums';
 
-const getAlbumById: RequestHandler = async (req, res) => {
+import InfoRequest from '../../interface/albumsInterface';
+const getAlbumById = async (req: InfoRequest, res: Response) => {
     try {
-        const id = <any>req.params.id;
-        console.log(id);
-        const albumsById = await Metadata.getAlbumById(id);
+        const id = req.params.id;
+        const person_id = req.person.id;
+        const albumsById = await Albums.getAlbumById(id, person_id);
         res.status(200).send(albumsById[0]);
     } catch (err) {
         res.status(501).send((err as Error).message);

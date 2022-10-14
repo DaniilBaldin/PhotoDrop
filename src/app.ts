@@ -68,3 +68,6 @@ app.use('/', adminRouter, photoRouter, albumRouter);
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+const date = new Date();
+console.log(date);
