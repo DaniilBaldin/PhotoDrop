@@ -21,7 +21,11 @@ const metadata = class Metadata {
         );
     }
 
-    static getAlbum(album_user: string) {
+    static getAlbums() {
+        return db.execute(`SELECT * FROM albums`);
+    }
+
+    static getAlbumsByUser(album_user: string) {
         return db.execute(`SELECT * FROM albums WHERE albums.album_user = ?`, [album_user]);
     }
 
@@ -33,7 +37,11 @@ const metadata = class Metadata {
         return db.execute(`DELETE FROM albums WHERE albums.album_id = ?`, [album_id]);
     }
 
-    static getPhotos(album_user: string) {
+    static getPhotos() {
+        return db.execute(`SELECT photo_id, photo_url FROM albums `);
+    }
+
+    static getPhotosByUser(album_user: string) {
         return db.execute(`SELECT photo_id, photo_url FROM albums WHERE albums.album_user = ?`, [album_user]);
     }
 

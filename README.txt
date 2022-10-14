@@ -17,7 +17,10 @@ Service for exchange photos between photographer and client based on AWS S3 serv
                 ALBUMS
   
 // method: GET - https://photodrop-app-1.herokuapp.com/albums 
-    Get all albums, owned by user in JSON format. Admin must be authorized. 
+    Get all albums in JSON format. Admin must be authorized. 
+
+// method: POST - https://photodrop-app-1.herokuapp.com/album 
+    Returns all albums, owned by user in JSON format. Admin must be authorized. 
     Return albums based on album user({"user": "user"} in JSON body(example)).
 
 // method: GET - https://photodrop-app-1.herokuapp.com/albums/<album_id> 
@@ -34,7 +37,10 @@ Service for exchange photos between photographer and client based on AWS S3 serv
     Opens upload page. For now works without authorization(Later will be added auth.). Amount of images is not limited.
 
 // method: GET - https://photodrop-app-1.herokuapp.com/photos 
-    Get all photos, owned by user in JSON format(photo_id, photo_url). Admin must be authorized. 
+    Get all photos in JSON format(photo_id, photo_url). Admin must be authorized. 
+
+// method: POST - https://photodrop-app-1.herokuapp.com/photo 
+    Returns all photos, owned by user in JSON format(photo_id, photo_url). Admin must be authorized. 
     Return photos based on album user({"user": "user"} in JSON body(example)).
 
 // method: GET - https://photodrop-app-1.herokuapp.com/photos/<photo_id> 

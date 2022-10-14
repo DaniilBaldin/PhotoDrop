@@ -2,6 +2,7 @@ import { Router } from 'express';
 import bodyParser from 'body-parser';
 
 import getAlbums from '../controllers/albums/getAlbums';
+import getAlbumsByUser from '../controllers/albums/getAlbumsByUser';
 import getAlbumById from '../controllers/albums/getAlbumById';
 import deleteAlbumById from '../controllers/albums/deleteAlbumById';
 
@@ -11,6 +12,7 @@ const albumRouter = Router();
 albumRouter.use(bodyParser.json());
 
 albumRouter.get('/albums', authMiddleware, getAlbums);
+albumRouter.post('/album', authMiddleware, getAlbumsByUser);
 albumRouter.get('/albums/:id', authMiddleware, getAlbumById);
 albumRouter.delete('/albums/:id', authMiddleware, deleteAlbumById);
 
