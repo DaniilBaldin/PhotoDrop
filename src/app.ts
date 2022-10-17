@@ -20,7 +20,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: true,
+        origin: '*',
         methods: ['OPTIONS', 'GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
         preflightContinue: false,
         optionsSuccessStatus: 204,
@@ -49,6 +49,12 @@ app.use(bodyParser.json());
 app.use(session({ secret: 'some secrety secret' }));
 
 app.use(express.static(path.join(__dirname, '../', '/public')));
+
+app.all('/', function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+    next();
+});
 
 app.get('/', (req, res) => {
     res.send('Hello there! General Kenobi!');
