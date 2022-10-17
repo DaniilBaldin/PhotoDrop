@@ -5,6 +5,7 @@ import InfoRequest from '../../interface/albumsInterface';
 
 const updateAlbum = async (req: InfoRequest, res: Response) => {
     try {
+        console.log(req);
         const id = req.body.id;
         const person_id = req.person.id;
         const album = await Albums.getAlbumById(id, person_id);

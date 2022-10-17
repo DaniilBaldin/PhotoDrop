@@ -18,35 +18,15 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-const corsOptions = {
-    origin: '*',
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-    allowedHeaders: [
-        'Content-Type',
-        'Content-Length',
-        'Content-Range',
-        'Content-Disposition',
-        'Content-Description',
-        'Access-Control-Allow-Origin',
-        'Access-Control-Allow-Headers',
-        'Authorization',
-        'Origin',
-        'X-Requested-With',
-        'X-AUTH-TOKEN',
-    ],
-    credentials: true,
-};
-app.use(cors(corsOptions));
-
-// app.use(
-//     cors({
-//         origin: 'https://photographers-admin.vercel.app',
-//         methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-//         preflightContinue: false,
-//         exposedHeaders: ['Access-Control-Allow-Origin'],
-//         optionsSuccessStatus: 204,
-//     })
-// );
+app.use(
+    cors({
+        origin: 'https://photographers-admin.vercel.app',
+        methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+        preflightContinue: true,
+        exposedHeaders: ['Access-Control-Allow-Origin'],
+        optionsSuccessStatus: 204,
+    })
+);
 
 // app.use(
 //     cors({
