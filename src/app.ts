@@ -22,6 +22,15 @@ app.use(
     cors({
         origin: ['http://localhost:5173/', 'http://localhost:5173', 'http://127.0.0.1:5173/', 'http://127.0.0.1:5173'],
         methods: ['OPTIONS', 'GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+        allowedHeaders: [
+            'Content-Type',
+            'Authorization',
+            'Uppy-Versions',
+            'Accept',
+            'x-requested-with',
+            'Access-Control-Allow-Origin',
+        ],
+        exposedHeaders: ['Access-Control-Allow-Headers', 'Access-Control-Allow-Origin'],
         preflightContinue: false,
         optionsSuccessStatus: 204,
     })
