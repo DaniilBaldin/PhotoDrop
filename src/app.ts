@@ -20,9 +20,12 @@ const app = express();
 
 app.use(
     cors({
+        origin: '*',
         methods: ['OPTIONS', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type', 'Authorization', 'Uppy-Versions', 'Accept', 'Access-Control-Allow-Origin'],
         exposedHeaders: ['Access-Control-Allow-Headers'],
+        preflightContinue: false,
+        optionsSuccessStatus: 204,
     })
 );
 
