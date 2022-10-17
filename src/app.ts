@@ -4,9 +4,9 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import session from 'cookie-session';
-import companion from '@uppy/companion';
+// import companion from '@uppy/companion';
 import cookieParser from 'cookie-parser';
-import crypto from 'crypto';
+// import crypto from 'crypto';
 import path from 'path';
 
 import adminRouter from './routes/adminRoutes';
@@ -21,7 +21,7 @@ const app = express();
 app.use(
     cors({
         origin: '*',
-        methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+        methods: ['OPTIONS', 'GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
         preflightContinue: false,
         optionsSuccessStatus: 204,
     })
@@ -50,47 +50,12 @@ app.use(session({ secret: 'some secrety secret' }));
 
 app.use(express.static(path.join(__dirname, '../', '/public')));
 
-const options = {
-    s3: {
-        getKey: (req: string, filename: string) => `${crypto.randomUUID()}/${filename}`,
-        key: process.env.AWS_KEY,
-        secret: process.env.AWS_SECRET,
-        bucket: process.env.S3_BUCKET,
-        region: process.env.S3_REGION,
-        useAccelerateEndpoint: false,
-        expires: 3600,
-    },
-    server: {
-        host: 'localhost:3020',
-        protocol: 'http',
-        path: '/companion',
-    },
-    filePath: './',
-    secret: 'mysecret',
-    uploadUrls: ['https://myuploadurl.com', /^http:\/\/myuploadurl2.com\//],
-    corsOrigins: false,
-};
-
-const { app: companionApp } = companion.app(options);
-
-app.use('/companion', companionApp);
-
-const server = app.listen(3020);
-
-companion.socket(server);
-
 app.get('/', (req, res) => {
-    res.send('Hello there, General Kenobi!');
+    res.send('Hello there! General Kenobi!');
 });
 
 app.use(express.json());
 app.use(cookieParser());
-
-app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
 
 app.use('/', adminRouter, photoRouter, albumRouter);
 
