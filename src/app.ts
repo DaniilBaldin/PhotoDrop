@@ -18,7 +18,14 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.use(cors());
+app.use(
+    cors({
+        origin: true,
+        methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+        preflightContinue: false,
+        optionsSuccessStatus: 204,
+    })
+);
 
 // app.use(
 //     cors({
@@ -61,13 +68,13 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, '../', '/public')));
 
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, UPDATE, HEAD, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, origin, content-type, accept');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    next();
-});
+// app.use(function (req, res, next) {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, UPDATE, HEAD, OPTIONS');
+//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, origin, content-type, accept');
+//     res.setHeader('Access-Control-Allow-Credentials', 'true');
+//     next();
+// });
 
 app.get('/', (req, res) => {
     res.send('Hello there! General Kenobi!');
