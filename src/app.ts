@@ -23,7 +23,7 @@ app.use(
         origin: '*',
         methods: ['OPTIONS', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type', 'Authorization', 'Uppy-Versions', 'Accept', 'Access-Control-Allow-Origin'],
-        exposedHeaders: ['Access-Control-Allow-Headers'],
+        exposedHeaders: ['Access-Control-Allow-Headers', 'Access-Control-Allow-Origin'],
         preflightContinue: false,
         optionsSuccessStatus: 204,
     })
