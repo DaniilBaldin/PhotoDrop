@@ -1,49 +1,34 @@
 import db from '../utils/databaseConnect';
 
-const metadata = class Metadata {
-    person_id: number;
+const photo = class Photo {
     photo_id: string;
-    album_id: string;
-    album_name: string;
-    album_location: string;
-    album_user: string;
+    photo_logo: string;
+    photo_name: string;
     photo_url: string;
+    album_id: string;
     date: string;
     constructor(
-        person_id: number,
         photo_id: string,
-        album_id: string,
-        album_name: string,
-        album_location: string,
-        album_user: string,
+        photo_logo: string,
+        photo_name: string,
         photo_url: string,
+        album_id: string,
         date: string
     ) {
-        this.person_id = person_id;
         this.photo_id = photo_id;
-        this.album_id = album_id;
-        this.album_name = album_name;
-        this.album_location = album_location;
-        this.album_user = album_user;
+        this.photo_logo = photo_logo;
+        this.photo_name = photo_name;
         this.photo_url = photo_url;
+        this.album_id = album_id;
         this.date = date;
     }
 
-    // saveAlbum() {
-    //     return db.execute('INSERT INTO albums (album_name, album_location, date, person_id) VALUES (?, ?, ?, ?, ?)', [
-    //         this.album_name,
-    //         this.album_location,
-    //         this.date,
-    //         this.person_id,
-    //     ]);
-    // }
-
-    static saveAlbum(album_name: string, album_location: string, date: string, person_id: number) {
-        return db.execute('INSERT INTO albums (album_name, album_location, date, person_id) VALUES (?, ?, ?, ?, ?)', [
-            album_name,
-            album_location,
-            date,
-            person_id,
+    static saveAlbum(photo_logo: string, photo_name: string, photo_url: string, album_id: number) {
+        return db.execute('INSERT INTO photo (photo_logo, photo_name, photo_url, album_id) VALUES (?, ?, ?, ?)', [
+            photo_logo,
+            photo_name,
+            photo_url,
+            album_id,
         ]);
     }
 
@@ -80,4 +65,4 @@ const metadata = class Metadata {
     }
 };
 
-export default metadata;
+export default photo;

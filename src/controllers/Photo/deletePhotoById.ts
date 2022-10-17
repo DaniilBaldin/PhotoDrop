@@ -4,7 +4,7 @@ import AWS from 'aws-sdk';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import Metadata from '../../models/metadata';
+import Metadata from '../../models/photo';
 
 const credentials = {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,

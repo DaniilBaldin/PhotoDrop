@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { RequestHandler } from 'express';
-import Metadata from '../../models/metadata';
+import Metadata from '../../models/photo';
 
 const getPhotos: RequestHandler = async (req, res) => {
     try {
