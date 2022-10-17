@@ -20,9 +20,10 @@ const app = express();
 
 app.use(
     cors({
-        origin: true,
+        origin: 'https://photographers-admin.vercel.app',
         methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
         preflightContinue: false,
+        exposedHeaders: ['Access-Control-Allow-Origin'],
         optionsSuccessStatus: 204,
     })
 );
