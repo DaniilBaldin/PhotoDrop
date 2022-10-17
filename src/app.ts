@@ -18,15 +18,15 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-// app.use(
-//     cors({
-//         origin: 'https://photographers-admin.vercel.app',
-//         methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-//         preflightContinue: false,
-//         exposedHeaders: ['Access-Control-Allow-Origin'],
-//         optionsSuccessStatus: 204,
-//     })
-// );
+app.use(
+    cors({
+        origin: 'https://photographers-admin.vercel.app',
+        methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+        preflightContinue: false,
+        exposedHeaders: ['Access-Control-Allow-Origin'],
+        optionsSuccessStatus: 204,
+    })
+);
 
 // app.use(
 //     cors({
@@ -69,13 +69,13 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, '../', '/public')));
 
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    // res.setHeader('Access-Control-Allow-Credentials', 'true');
-    next();
-});
+// app.use(function (req, res, next) {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     res.setHeader('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+//     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     // res.setHeader('Access-Control-Allow-Credentials', 'true');
+//     next();
+// });
 
 app.get('/', (req, res) => {
     res.send('Hello there! General Kenobi!');
