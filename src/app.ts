@@ -46,7 +46,7 @@ app.use(
 // );
 
 app.use(bodyParser.json());
-app.use(session({ secret: 'some secrety secret' }));
+// app.use(session({ secret: 'some secrety secret' }));
 
 app.use(express.static(path.join(__dirname, '../', '/public')));
 
@@ -61,7 +61,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(express.json());
-app.use(cookieParser());
+// app.use(cookieParser());
 
 app.use('/', adminRouter, photoRouter, albumRouter);
 
