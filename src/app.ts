@@ -20,14 +20,30 @@ const app = express();
 
 app.use(
     cors({
-        origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
-        methods: ['OPTIONS', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'UPDATE'],
-        allowedHeaders: ['Content-Type', 'Authorization', 'Uppy-Versions', 'Accept', 'Access-Control-Allow-Origin'],
-        exposedHeaders: ['Access-Control-Allow-Headers', 'Access-Control-Allow-Origin'],
+        origin: '*',
+        methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
         preflightContinue: false,
         optionsSuccessStatus: 204,
     })
 );
+
+// app.use(
+//     cors({
+//         origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+//         methods: ['OPTIONS', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'UPDATE'],
+//         allowedHeaders: [
+//             'Content-Type',
+//             'Authorization',
+//             'Uppy-Versions',
+//             'Accept',
+//             'x-requested-with',
+//             'Access-Control-Allow-Origin',
+//         ],
+//         exposedHeaders: ['Access-Control-Allow-Headers', 'Access-Control-Allow-Origin'],
+//         preflightContinue: false,
+//         optionsSuccessStatus: 204,
+//     })
+// );
 
 app.use(bodyParser.json());
 app.use(session({ secret: 'some secrety secret' }));
