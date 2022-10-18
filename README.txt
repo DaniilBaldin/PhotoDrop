@@ -34,19 +34,7 @@ Service for exchange photos between photographer and client based on AWS S3 serv
     
                 PHOTO    
 
-// method: GET - https://photodrop-app-1.herokuapp.com/upload 
-    Opens upload page. For now works without authorization(Later will be added auth.). Amount of images is not limited.
-
-// method: GET - https://photodrop-app-1.herokuapp.com/photos 
-    Get all photos in JSON format(photo_id, photo_url). Admin must be authorized. 
-
 // method: POST - https://photodrop-app-1.herokuapp.com/photo 
-    Returns all photos, owned by user in JSON format(photo_id, photo_url). Admin must be authorized. 
-    Return photos based on album user({"user": "user"} in JSON body(example)).
+    Upload photo. 
 
-// method: GET - https://photodrop-app-1.herokuapp.com/photos/<photo_id> 
-    Get photo url, based on photo_id. Admin must be authorized. 
-    Return photo_url in JSON format(photo_url)).
-
-// method: DELETE - https://photodrop-app-1.herokuapp.com/photos/<photo_id> 
-    Delete photo by photo id. Also deletes photo from AWS S3. Admin must be authorized.         
+       
