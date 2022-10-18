@@ -16,30 +16,30 @@ const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
 
-// app.use(
-//     cors({
-//         origin: '*',
-//         // origin: [
-//         //     'https://photographers-admin.vercel.app',
-//         //     'https://photographers-admin.vercel.app/album',
-//         //     'https://photographers-admin.vercel.app/',
-//         //     'https://photodrop-app-1.herokuapp.com/album',
-//         //     'https://photodrop-app-1.herokuapp.com/',
-//         //     'https://photodrop-app-1.herokuapp.com',
-//         // ],
-//         methods: ['PUT', 'GET', 'HEAD', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-//         allowedHeaders: [
-//             'Content-Type',
-//             'Authorization',
-//             'Uppy-Versions',
-//             'Accept',
-//             'x-requested-with',
-//             'Access-Control-Allow-Origin',
-//         ],
-//         credentials: true,
-//         exposedHeaders: ['Access-Control-Allow-Origin', 'Access-Control-Allow-Headers'],
-//     })
-// );
+app.use(
+    cors({
+        origin: '*',
+        // origin: [
+        //     'https://photographers-admin.vercel.app',
+        //     'https://photographers-admin.vercel.app/album',
+        //     'https://photographers-admin.vercel.app/',
+        //     'https://photodrop-app-1.herokuapp.com/album',
+        //     'https://photodrop-app-1.herokuapp.com/',
+        //     'https://photodrop-app-1.herokuapp.com',
+        // ],
+        methods: ['PUT', 'GET', 'HEAD', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+        allowedHeaders: [
+            'Content-Type',
+            'Authorization',
+            'Uppy-Versions',
+            'Accept',
+            'x-requested-with',
+            'Access-Control-Allow-Origin',
+        ],
+        // credentials: true,
+        exposedHeaders: ['Access-Control-Allow-Origin', 'Access-Control-Allow-Headers'],
+    })
+);
 
 // app.use(
 //     cors({
