@@ -9,7 +9,7 @@ const updateAlbum = async (req: InfoRequest, res: Response) => {
         const person_id = req.person.id;
         console.log(id, person_id);
         const album = await Albums.getAlbumById(id, person_id);
-        console.log(album);
+        console.log(album[0]);
         const updateAlbum = JSON.parse(JSON.stringify(album[0]));
         console.log(updateAlbum);
         if (!updateAlbum.length) {
@@ -21,7 +21,7 @@ const updateAlbum = async (req: InfoRequest, res: Response) => {
             const album_location = req.body.album_location ?? updateAlbum.album_location;
             const date = new Date(req.body.date).toISOString();
             console.log(album_logo, album_location, album_name, date);
-            // await Albums.updateAlbum(album_logo, album_name, album_location, date, id, person_id);
+            Albums.updateAlbum(album_logo, album_name, album_location, date, id, person_id);
             res.status(200).json({ message: 'Updated!' });
         }
     } catch (err) {
