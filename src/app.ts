@@ -3,11 +3,6 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import session from 'cookie-session';
-// import companion from '@uppy/companion';
-import cookieParser from 'cookie-parser';
-// import crypto from 'crypto';
-import path from 'path';
 
 import adminRouter from './routes/adminRoutes';
 import photoRouter from './routes/photoRoutes';
@@ -18,13 +13,21 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-// app.options('*', cors());
 app.use(
     cors({
         origin: 'https://photographers-admin.vercel.app',
         methods: ['PUT', 'GET', 'HEAD', 'PATCH', 'POST', 'DELETE'],
-        preflightContinue: true,
-        exposedHeaders: ['Access-Control-Allow-Origin'],
+        allowedHeaders: [
+            'Content-Type',
+            'Authorization',
+            'Uppy-Versions',
+            'Accept',
+            'x-requested-with',
+            'Access-Control-Allow-Origin',
+        ],
+        preflightContinue: false,
+        credentials: false,
+        exposedHeaders: ['Access-Control-Allow-Origin', 'Access-Control-Allow-Headers'],
         optionsSuccessStatus: 204,
     })
 );
