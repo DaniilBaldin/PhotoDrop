@@ -13,6 +13,9 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+app.use(express.json());
+app.use(bodyParser.json());
+
 app.use(
     cors({
         origin: [
@@ -73,8 +76,6 @@ app.use(
 //     })
 // );
 
-app.use(bodyParser.json());
-
 // app.use(function (req, res, next) {
 //     res.setHeader('Access-Control-Allow-Origin', '*');
 //     res.setHeader('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
@@ -83,11 +84,9 @@ app.use(bodyParser.json());
 //     next();
 // });
 
-app.get('/', (req, res) => {
-    res.send('Hello there! General Kenobi!');
-});
-
-app.use(express.json());
+// app.get('/', (req, res) => {
+//     res.send('Hello there! General Kenobi!');
+// });
 
 app.use('/', adminRouter, photoRouter, albumRouter);
 
