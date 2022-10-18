@@ -1,4 +1,4 @@
-import e, { Response } from 'express';
+import { Response } from 'express';
 import Albums from '../../models/albums';
 
 import InfoRequest from '../../interface/albumsInterface';

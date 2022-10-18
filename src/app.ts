@@ -15,7 +15,14 @@ const app = express();
 
 app.use(
     cors({
-        origin: 'https://photographers-admin.vercel.app',
+        origin: [
+            'https://photographers-admin.vercel.app',
+            'https://photographers-admin.vercel.app/album',
+            'https://photographers-admin.vercel.app/',
+            'https://photodrop-app-1.herokuapp.com/album',
+            'https://photodrop-app-1.herokuapp.com/',
+            'https://photodrop-app-1.herokuapp.com',
+        ],
         methods: ['PUT', 'GET', 'HEAD', 'PATCH', 'POST', 'DELETE'],
         allowedHeaders: [
             'Content-Type',
