@@ -18,16 +18,16 @@ app.use(bodyParser.json());
 
 app.use(
     cors({
-        // origin: '*',
-        origin: [
-            'https://photographers-admin.vercel.app',
-            'https://photographers-admin.vercel.app/album',
-            'https://photographers-admin.vercel.app/',
-            'https://photodrop-app-1.herokuapp.com/album',
-            'https://photodrop-app-1.herokuapp.com/',
-            'https://photodrop-app-1.herokuapp.com',
-            'http://localhost:5173',
-        ],
+        origin: '*',
+        // origin: [
+        //     'https://photographers-admin.vercel.app',
+        //     'https://photographers-admin.vercel.app/album',
+        //     'https://photographers-admin.vercel.app/',
+        //     'https://photodrop-app-1.herokuapp.com/album',
+        //     'https://photodrop-app-1.herokuapp.com/',
+        //     'https://photodrop-app-1.herokuapp.com',
+        //     'http://localhost:5173',
+        // ],
         methods: ['PUT', 'GET', 'HEAD', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
         allowedHeaders: [
             'Content-Type',
@@ -90,7 +90,7 @@ app.get('/', (req, res) => {
     res.send('Hello there! General Kenobi!');
 });
 
-app.use('/', adminRouter, photoRouter, albumRouter);
+app.use('/api', adminRouter, photoRouter, albumRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
