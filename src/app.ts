@@ -23,7 +23,7 @@ app.use(
             'https://photodrop-app-1.herokuapp.com/',
             'https://photodrop-app-1.herokuapp.com',
         ],
-        methods: ['PUT', 'GET', 'HEAD', 'PATCH', 'POST', 'DELETE'],
+        methods: ['PUT', 'GET', 'HEAD', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
         allowedHeaders: [
             'Content-Type',
             'Authorization',
@@ -32,10 +32,8 @@ app.use(
             'x-requested-with',
             'Access-Control-Allow-Origin',
         ],
-        preflightContinue: false,
-        credentials: false,
+        credentials: true,
         exposedHeaders: ['Access-Control-Allow-Origin', 'Access-Control-Allow-Headers'],
-        optionsSuccessStatus: 204,
     })
 );
 
