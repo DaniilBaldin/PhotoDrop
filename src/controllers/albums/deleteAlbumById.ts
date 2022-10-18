@@ -8,7 +8,7 @@ const deleteAlbumById = async (req: InfoRequest, res: Response) => {
     try {
         const id = req.params.id as any;
         const person_id = req.person.id;
-        await Albums.deleteAlbumById(id, person_id);
+        Albums.deleteAlbumById(id, person_id);
         res.status(200).json({ message: 'Deleted!' });
     } catch (err) {
         res.status(501).send((err as Error).message);
