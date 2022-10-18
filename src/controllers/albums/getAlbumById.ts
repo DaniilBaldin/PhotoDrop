@@ -8,9 +8,17 @@ const getAlbumById = async (req: InfoRequest, res: Response) => {
         const id = req.params.id as any;
         const person_id = req.person.id;
         const albumsById = await Albums.getAlbumById(id, person_id);
-        res.status(200).send(albumsById[0]);
+        res.status(200).json({
+            data: albumsById[0],
+            success: true,
+        });
     } catch (err) {
-        res.status(501).send((err as Error).message);
+        res.json({
+            error: {
+                message: (err as Error).message,
+            },
+            success: false,
+        });
     }
 };
 

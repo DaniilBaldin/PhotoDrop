@@ -21,7 +21,12 @@ const loginUser: RequestHandler = async (req, res) => {
             },
         });
     } catch (err) {
-        res.send((err as Error).message);
+        res.json({
+            error: {
+                message: (err as Error).message,
+            },
+            success: false,
+        });
     }
 };
 

@@ -22,7 +22,12 @@ const uploadPhoto = async (req: any, res: Response) => {
         // await Photo.saveAlbum(photo_logo, photo_name, photo_url, album_id);
         return res.json({ message: 'Saved!' });
     } catch (err) {
-        res.status(501).send((err as Error).message);
+        res.json({
+            error: {
+                message: (err as Error).message,
+            },
+            success: false,
+        });
     }
 };
 
