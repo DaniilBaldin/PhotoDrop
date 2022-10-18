@@ -18,15 +18,16 @@ app.use(bodyParser.json());
 
 app.use(
     cors({
-        origin: '*',
-        // origin: [
-        //     'https://photographers-admin.vercel.app',
-        //     'https://photographers-admin.vercel.app/album',
-        //     'https://photographers-admin.vercel.app/',
-        //     'https://photodrop-app-1.herokuapp.com/album',
-        //     'https://photodrop-app-1.herokuapp.com/',
-        //     'https://photodrop-app-1.herokuapp.com',
-        // ],
+        // origin: '*',
+        origin: [
+            'https://photographers-admin.vercel.app',
+            'https://photographers-admin.vercel.app/album',
+            'https://photographers-admin.vercel.app/',
+            'https://photodrop-app-1.herokuapp.com/album',
+            'https://photodrop-app-1.herokuapp.com/',
+            'https://photodrop-app-1.herokuapp.com',
+            'http://localhost:5173',
+        ],
         methods: ['PUT', 'GET', 'HEAD', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
         allowedHeaders: [
             'Content-Type',
