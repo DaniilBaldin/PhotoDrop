@@ -22,7 +22,8 @@ const updateAlbum = async (req: InfoRequest, res: Response) => {
             const date = new Date(req.body.date).toISOString();
             console.log(album_logo, album_location, album_name, date);
             await Albums.updateAlbum(album_logo, album_name, album_location, date, id, person_id);
-            res.status(200).json({ message: 'Updated!' });
+            const albumUpd = await Albums.getAlbum(person_id, album_name, date);
+            res.status(200).json(albumUpd[0]);
         }
     } catch (err) {
         res.status(501).send((err as Error).message);
