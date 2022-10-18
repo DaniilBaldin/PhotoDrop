@@ -13,8 +13,12 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.use(express.json());
 app.use(bodyParser.json());
+
+app.use(function (req, res, next) {
+    res.setTimeout(200);
+    next();
+});
 
 app.use(
     cors({
@@ -29,16 +33,6 @@ app.use(
         //     'http://localhost:5173',
         // ],
         methods: ['PUT', 'GET', 'HEAD', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-        allowedHeaders: [
-            'Content-Type',
-            'Authorization',
-            'Uppy-Versions',
-            'Accept',
-            'x-requested-with',
-            'Access-Control-Allow-Origin',
-        ],
-        // credentials: true,
-        exposedHeaders: ['Access-Control-Allow-Origin', 'Access-Control-Allow-Headers'],
     })
 );
 
@@ -89,8 +83,8 @@ app.use(
 app.get('/', (req, res) => {
     res.send('Hello there! General Kenobi!');
 });
-
-app.use('/api', adminRouter, photoRouter, albumRouter);
+app.use(express.json());
+app.use('/', adminRouter, photoRouter, albumRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
