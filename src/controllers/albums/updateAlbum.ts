@@ -22,7 +22,7 @@ const updateAlbum = async (req: InfoRequest, res: Response) => {
             const date = new Date(req.body.date).toISOString();
             console.log(album_logo, album_location, album_name, date);
             Albums.updateAlbum(album_logo, album_name, album_location, date, id, person_id);
-            const albumUpd = await Albums.getAlbum(person_id, album_name, date);
+            const albumUpd = await Albums.getAlbum(person_id, album_name);
             res.status(200).json(albumUpd[0]);
         }
     } catch (err) {

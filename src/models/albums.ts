@@ -36,11 +36,11 @@ const albums = class Albums {
         return db.execute(`SELECT * FROM albums WHERE albums.person_id = ?`, [person_id]);
     }
 
-    static getAlbum(person_id: number, album_name: string, date: string) {
-        return db.execute(
-            `SELECT * FROM albums WHERE albums.person_id = ? AND albums.album_name = ? and albums.date = ?`,
-            [person_id, album_name, date]
-        );
+    static getAlbum(person_id: number, album_name: string) {
+        return db.execute(`SELECT * FROM albums WHERE albums.person_id = ? AND albums.album_name = ?`, [
+            person_id,
+            album_name,
+        ]);
     }
 
     static getAlbumById(id: number, person_id: number) {
