@@ -20,22 +20,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-// app.use(
-//     cors({
-//         // origin: '*',
-//         origin: [
-//             'https://photographers-admin.vercel.app',
-//             'https://photographers-admin.vercel.app/album',
-//             'https://photographers-admin.vercel.app/',
-//             'https://photodrop-app-1.herokuapp.com/album',
-//             'https://photodrop-app-1.herokuapp.com/',
-//             'https://photodrop-app-1.herokuapp.com',
-//             'http://localhost:5173',
-//         ],
-//         methods: ['PUT', 'GET', 'HEAD', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-//     })
-// );
-
 app.use(
     cors({
         origin: '*',
@@ -53,32 +37,6 @@ app.use(
         optionsSuccessStatus: 204,
     })
 );
-
-// app.use(
-//     cors({
-//         origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
-//         methods: ['OPTIONS', 'GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'UPDATE'],
-//         allowedHeaders: [
-//             'Content-Type',
-//             'Authorization',
-//             'Uppy-Versions',
-//             'Accept',
-//             'x-requested-with',
-//             'Access-Control-Allow-Origin',
-//         ],
-//         exposedHeaders: ['Access-Control-Allow-Headers', 'Access-Control-Allow-Origin'],
-//         preflightContinue: false,
-//         optionsSuccessStatus: 204,
-//     })
-// );
-
-// app.use(function (req, res, next) {
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     res.setHeader('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-//     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//     // res.setHeader('Access-Control-Allow-Credentials', 'true');
-//     next();
-// });
 
 app.get('/', (req, res) => {
     res.send('Hello there! General Kenobi!');
