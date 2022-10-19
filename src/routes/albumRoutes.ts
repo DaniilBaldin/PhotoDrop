@@ -14,7 +14,7 @@ albumRouter.use(bodyParser.json());
 
 albumRouter.post('/album', authMiddleware, createAlbum);
 albumRouter.get('/albums', authMiddleware, getAlbums);
-albumRouter.get('/albums/:id', authMiddleware, getAlbumById);
+albumRouter.get('/album/:id', authMiddleware, getAlbumById);
 albumRouter.put('/album', authMiddleware, updateAlbum);
 albumRouter.delete('/albums/:id', authMiddleware, deleteAlbumById);
 

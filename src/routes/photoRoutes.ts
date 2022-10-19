@@ -5,17 +5,20 @@ import authMiddleware from '../middleware/authMiddleware';
 import uploader from '../middleware/uploaderMiddleware';
 
 import uploadPhoto from '../controllers/Photo/uploadPhoto';
+import uploadPhotos from '../controllers/Photo/uploadPhotos';
 import getPhotos from '../controllers/Photo/getPhotos';
-import getPhotosByUser from '../controllers/Photo/getPhotosByUser';
 import getPhotosById from '../controllers/Photo/getPhotosById';
-import deletePhotosById from '../controllers/Photo/deletePhotoById';
+import updatePhoto from '../controllers/Photo/updatePhoto';
+import deletePhotoById from '../controllers/Photo/deletePhotoById';
 
 const photoRouter = Router();
 photoRouter.use(bodyParser.json());
 
 photoRouter.post('/photo', authMiddleware, uploader.array('file'), uploadPhoto);
-// photoRouter.post('/photos', authMiddleware, getPhotos);
-// photoRouter.get('/photos/:id', authMiddleware, getPhotosById);
-// photoRouter.delete('/photos/:id', authMiddleware, deletePhotosById);
+photoRouter.post('/photos', authMiddleware, uploader.array('file'), uploadPhotos);
+photoRouter.get('/photos/:id', authMiddleware, getPhotos);
+photoRouter.get('/photo', authMiddleware, getPhotosById);
+photoRouter.put('/photo', authMiddleware, updatePhoto);
+photoRouter.delete('/photo/:id', authMiddleware, deletePhotoById);
 
 export default photoRouter;

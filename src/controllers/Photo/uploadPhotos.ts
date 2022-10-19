@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { RequestHandler } from 'express';
+import { Response } from 'express';
 
-import Photo from '../../models/photo';
+import s3Upload from '../../services/s3Upload';
 
-const deletePhotoById: RequestHandler = async (req, res) => {
+const uploadPhotos = async (req: any, res: Response) => {
     try {
-        const id = req.params.id;
-        await Photo.deletePhotoById(id);
+        const { album_id } = req.body;
+        await s3Upload(req.files, album_id);
         res.status(200).json({
-            data: 'Deleted!',
+            data: 'Saved!',
             success: true,
         });
     } catch (err) {
@@ -21,4 +21,4 @@ const deletePhotoById: RequestHandler = async (req, res) => {
     }
 };
 
-export default deletePhotoById;
+export default uploadPhotos;

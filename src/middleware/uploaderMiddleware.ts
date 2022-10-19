@@ -6,8 +6,9 @@ const storage = multer.memoryStorage();
 const fileFilter = (req: any, file: any, cb: any) => {
     if (file.mimetype.split('/')[0] === 'image') {
         cb(null, true);
+    } else {
+        cb(new multer.MulterError('LIMIT_UNEXPECTED_FILE'), false);
     }
-    cb(new multer.MulterError('LIMIT_UNEXPECTED_FILE'), false);
 };
 
 export default multer({

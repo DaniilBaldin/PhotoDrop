@@ -4,9 +4,9 @@ import makeThumbnail from 'image-thumbnail';
 
 const thumbnail = async (image: any) => {
     try {
-        console.log(image.Buffer);
-        const result: any = await makeThumbnail(new (Buffer.from as any)(image.Buffer));
-        console.log('Thumbnail created!');
+        const buffer = image.buffer;
+        const result: any = await makeThumbnail(new (Buffer.from as any)(buffer));
+        // console.log('Thumbnail created!');
         const originName = image.originalname.split('.');
         const name = image.originalname + 'thumbnail.' + originName.pop();
         return {

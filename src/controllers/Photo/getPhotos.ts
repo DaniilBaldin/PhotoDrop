@@ -1,13 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { RequestHandler } from 'express';
-import Metadata from '../../models/photo';
+import { Response } from 'express';
+import Photo from '../../models/photo';
 
-const getPhotos: RequestHandler = async (req, res) => {
+import InfoRequest from '../../interface/albumsInterface';
+
+const getPhotos = async (req: InfoRequest, res: Response) => {
     try {
-        const photoResult = await Metadata.getPhotos();
-        res.status(200).send(photoResult[0]);
+        const album_id = req.params.id;
+        const photo = await Photo.getPhotos(album_id);
+        // res.status(200).json(photo[0]);
+        res.status(200).json({
+            data: photo[0],
+            success: true,
+        });
     } catch (err) {
-        res.status(501).send((err as Error).message);
+        res.json({
+            error: {
+                message: (err as Error).message,
+            },
+            success: false,
+        });
     }
 };
 

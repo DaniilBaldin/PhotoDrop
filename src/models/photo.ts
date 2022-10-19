@@ -23,7 +23,7 @@ const photo = class Photo {
         this.date = date;
     }
 
-    static saveAlbum(photo_logo: string, photo_name: string, photo_url: string, album_id: number) {
+    static save(photo_logo: string, photo_name: string, photo_url: string, album_id: number) {
         return db.execute('INSERT INTO photo (photo_logo, photo_name, photo_url, album_id) VALUES (?, ?, ?, ?)', [
             photo_logo,
             photo_name,
@@ -32,36 +32,20 @@ const photo = class Photo {
         ]);
     }
 
-    static getAlbums() {
-        return db.execute(`SELECT * FROM albums`);
+    static getPhotos(album_id: string) {
+        return db.execute(`SELECT * FROM photo WHERE photo.album_id = ?`, [album_id]);
     }
 
-    static getAlbumsByUser(album_user: string) {
-        return db.execute(`SELECT * FROM albums WHERE albums.album_user = ?`, [album_user]);
-    }
-
-    static getAlbumById(album_id: string) {
-        return db.execute(`SELECT * FROM albums WHERE albums.album_id = ?`, [album_id]);
-    }
-
-    static deleteAlbumById(album_id: string) {
-        return db.execute(`DELETE FROM albums WHERE albums.album_id = ?`, [album_id]);
-    }
-
-    static getPhotos() {
-        return db.execute(`SELECT photo_id, photo_url FROM albums `);
-    }
-
-    static getPhotosByUser(album_user: string) {
-        return db.execute(`SELECT photo_id, photo_url FROM albums WHERE albums.album_user = ?`, [album_user]);
+    static updatePhoto(photo_name: string, photo_id: string) {
+        return db.execute(`UPDATE photo SET photo.photo_name = ? WHERE photo.id = ?`, [photo_name, photo_id]);
     }
 
     static getPhotoById(photo_id: string) {
-        return db.execute(`SELECT photo_url FROM albums WHERE albums.photo_id = ?`, [photo_id]);
+        return db.execute(`SELECT * FROM photo WHERE photo.id = ?`, [photo_id]);
     }
 
     static deletePhotoById(photo_id: string) {
-        return db.execute(`DELETE FROM albums WHERE albums.photo_id = ?`, [photo_id]);
+        return db.execute(`DELETE FROM photo WHERE photo.id = ?`, [photo_id]);
     }
 };
 

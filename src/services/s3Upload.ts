@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import AWS from 'aws-sdk';
 import dotenv from 'dotenv';
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 dotenv.config();
 import crypto from 'crypto';
+import Photo from '..//models/photo';
+import makeThumbnail from '../services/thumbnailService';
+
+const BUCKET = process.env.S3_BUCKET;
 
 const credentials = {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -11,26 +14,38 @@ const credentials = {
 };
 
 AWS.config.update(credentials);
+const s3 = new AWS.S3();
 
-const s3Upload = async (files: any[]) => {
-    const config = {};
-    const s3client = new S3Client(config);
-    const urls: any[] = [];
+const s3Upload = async (files: any, album_id: any) => {
+    files.forEach(async (e: any) => {
+        const photo_logo = await makeThumbnail(e);
+        console.log(photo_logo);
+        const type = e.originalname.split('.')[1];
+        const typeThumb = photo_logo?.originalname.split('.').reverse()[0];
+        const key = `upload/${crypto.randomUUID()}.${type}`;
+        const keyThumb = `upload/${crypto.randomUUID()}.${typeThumb}`;
 
-    const params = files.map((file: any) => {
-        const key = `upload/${crypto.randomUUID()}-${file.originalname}`.replace(/ /g, '');
-        urls.push(`${process.env.PRE_URL}${key}`);
-        return {
-            Bucket: process.env.AWS_BUCKET_NAME,
+        const params = {
+            ContentType: e.mimetype,
+            Bucket: BUCKET,
+            Body: e.buffer,
             Key: key,
-            Body: file.buffer,
         };
+        const paramsThumb = {
+            ContentType: photo_logo?.mimetype,
+            Bucket: BUCKET,
+            Body: photo_logo?.buffer,
+            Key: keyThumb,
+        };
+
+        s3.putObject(params as any).promise();
+        s3.putObject(paramsThumb as any).promise();
+        const photo_name = e.originalname;
+        const photo_url = `https://${BUCKET}.s3.amazonaws.com/${params.Key}`;
+        const thumb_url = `https://${BUCKET}.s3.amazonaws.com/${paramsThumb.Key}`;
+        const id = album_id || 'Default';
+        await Photo.save(thumb_url, photo_name, photo_url, id);
     });
-
-    const result = await Promise.all(params.map((param) => s3client.send(new PutObjectCommand(param))));
-    result.forEach((item: any, index) => (item.url = urls[index]));
-
-    return result;
 };
 
 export default s3Upload;
