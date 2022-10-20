@@ -2,11 +2,20 @@
 import { Response } from 'express';
 
 import s3Upload from '../../services/s3Upload';
+import s3UploadHeic from '../../services/s3UploadHeic';
 
 const uploadPhotos = async (req: any, res: Response) => {
     try {
         const { album_id } = req.body;
-        await s3Upload(req.files, album_id);
+        const files = req.files;
+        files.forEach(async (e: any) => {
+            if (e.originalname.split('.').reverse()[0] !== 'heic') {
+                await s3Upload(e, album_id);
+            } else {
+                await s3UploadHeic(e, album_id);
+            }
+        });
+        // res.status(200).json('Saved!');
         res.status(200).json({
             data: 'Saved!',
             success: true,

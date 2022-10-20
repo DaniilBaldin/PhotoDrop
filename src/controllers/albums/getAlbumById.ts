@@ -8,6 +8,7 @@ const getAlbumById = async (req: InfoRequest, res: Response) => {
         const id = req.params.id as any;
         const person_id = req.person.id;
         const albumsById = await Albums.getAlbumById(id, person_id);
+        // res.status(200).json(albumsById[0]);
         res.status(200).json({
             data: albumsById[0],
             success: true,

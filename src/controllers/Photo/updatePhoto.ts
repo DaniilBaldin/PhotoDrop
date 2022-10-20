@@ -18,6 +18,7 @@ const updatePhoto = async (req: InfoRequest, res: Response) => {
             .then(async (result) => {
                 await Photo.updatePhoto(result[0], result[1]);
             });
+        // res.status(200).json('Updated!');
         res.status(200).json({
             data: 'Updated!',
             success: true,

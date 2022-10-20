@@ -7,6 +7,7 @@ const deletePhotoById: RequestHandler = async (req, res) => {
     try {
         const id = req.params.id;
         await Photo.deletePhotoById(id);
+        // res.status(200).json('deleted!');
         res.status(200).json({
             data: 'Deleted!',
             success: true,

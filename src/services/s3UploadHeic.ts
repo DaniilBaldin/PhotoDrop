@@ -3,8 +3,9 @@ import AWS from 'aws-sdk';
 import dotenv from 'dotenv';
 dotenv.config();
 import crypto from 'crypto';
-import Photo from '..//models/photo';
+import Photo from '../models/photo';
 import makeThumbnail from 'image-thumbnail';
+import Convert from 'heic-convert';
 
 const BUCKET = process.env.S3_BUCKET;
 
@@ -16,27 +17,36 @@ const credentials = {
 AWS.config.update(credentials);
 const s3 = new AWS.S3();
 
-const s3Upload = async (files: any, album_id: any) => {
+const s3UploadHeic = async (files: any, album_id: any) => {
+    const buffer = files.buffer;
+    const convert = async () => {
+        const outBuffer = await Convert({
+            buffer: buffer,
+            format: 'JPEG',
+            quality: 1,
+        });
+        return outBuffer;
+    };
+    const convertedBuffer = await convert();
     const options: any = {
         percentage: 25,
         // width: 385,
         // height: 385,
     };
-    const buffer = files.buffer;
-    const photo_logo: any = await makeThumbnail(new (Buffer.from as any)(buffer), options);
+    const photo_logo: any = await makeThumbnail(new (Buffer.from as any)(convertedBuffer), options);
 
-    const type = files.originalname.split('.')[1];
+    const type = 'jpeg';
     const key = `upload/${crypto.randomUUID()}.${type}`;
     const keyThumb = `upload/${crypto.randomUUID()}.${type}`;
 
     const params = {
-        ContentType: files.mimetype,
+        ContentType: 'image/jpeg',
         Bucket: BUCKET,
-        Body: files.buffer,
+        Body: convertedBuffer,
         Key: key,
     };
     const paramsThumb = {
-        ContentType: files?.mimetype,
+        ContentType: 'image/jpeg',
         Bucket: BUCKET,
         Body: photo_logo,
         Key: keyThumb,
@@ -44,7 +54,7 @@ const s3Upload = async (files: any, album_id: any) => {
 
     s3.putObject(params as any).promise();
     s3.putObject(paramsThumb as any).promise();
-    const photo_name = files.originalname || 'default';
+    const photo_name = files.originalname;
     const photo_url = `https://${BUCKET}.s3.amazonaws.com/${params.Key}`;
     const thumb_url = `https://${BUCKET}.s3.amazonaws.com/${paramsThumb.Key}`;
     const id = album_id || 'Default';
@@ -59,4 +69,4 @@ const s3Upload = async (files: any, album_id: any) => {
     };
 };
 
-export default s3Upload;
+export default s3UploadHeic;

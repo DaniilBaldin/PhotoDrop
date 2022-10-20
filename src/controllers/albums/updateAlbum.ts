@@ -21,6 +21,7 @@ const updateAlbum = async (req: InfoRequest, res: Response) => {
             .then(async (result) => {
                 await Albums.updateAlbum(result[0], result[1], result[2], result[3], result[4], result[5]);
             });
+        // res.status(200).json('Updated!');
         res.status(200).json({
             data: 'Updated!',
             success: true,
