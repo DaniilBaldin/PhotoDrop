@@ -1,30 +1,30 @@
 import db from '../utils/databaseConnect';
 
-const photo = class Photo {
-    photo_id: string;
+const client = class Client {
+    id: string;
     client_name: string;
     phone_number: string;
-    constructor(photo_id: string, photo_logo: string, photo_name: string) {
-        this.photo_id = photo_id;
+    constructor(id: string, photo_logo: string, photo_name: string) {
+        this.id = id;
         this.client_name = photo_logo;
         this.phone_number = photo_name;
     }
 
-    static save(photo_id: string, client_name: string, phone_number: string) {
-        return db.execute('INSERT INTO photo (photo_logo, photo_name, photo_url, album_id) VALUES (?, ?, ?, ?)', [
-            photo_id,
-            client_name,
-            phone_number,
-        ]);
+    static save(client_name: string, phone_number: string) {
+        return db.execute('INSERT INTO clients (client_name, phone_number) VALUES (?, ?)', [client_name, phone_number]);
     }
 
-    static getPhotos(album_id: string) {
-        return db.execute(`SELECT * FROM photo WHERE photo.album_id = ?`, [album_id]);
+    static getClients() {
+        return db.execute(`SELECT * FROM clients `);
     }
 
-    static getPhotoById(photo_id: string) {
-        return db.execute(`SELECT * FROM photo WHERE photo.id = ?`, [photo_id]);
+    static getClientByNumber(phone_number: string) {
+        return db.execute(`SELECT * FROM clients WHERE clients.phone_number = ?`, [phone_number]);
+    }
+
+    static getClientById(id: string) {
+        return db.execute(`SELECT * FROM clients WHERE clients.id = ?`, [id]);
     }
 };
 
-export default photo;
+export default client;

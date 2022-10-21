@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 import adminRouter from './routes/adminRoutes';
 import photoRouter from './routes/photoRoutes';
 import albumRouter from './routes/albumRoutes';
+import clientsRouter from './routes/clientsRoutes';
 
 dotenv.config();
 
@@ -43,7 +44,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(express.json());
-app.use('/', adminRouter, photoRouter, albumRouter);
+app.use('/', adminRouter, photoRouter, albumRouter, clientsRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

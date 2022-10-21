@@ -13,19 +13,11 @@ const createAlbum = async (req: InfoRequest, res: Response) => {
         const albumParsed = JSON.parse(JSON.stringify(album[0]));
         const id = albumParsed.insertId;
         Albums.getAlbumById(id, person_id).then((result) => {
-            console.log(result[0]);
-            // console.log(albumSaved);
             res.status(200).json({
                 data: result[0],
                 success: true,
             });
         });
-
-        // console.log(albumSaved);
-        // res.status(200).json({
-        //     data: albumSaved[0],
-        //     success: true,
-        // });
     } catch (err) {
         res.json({
             error: {
