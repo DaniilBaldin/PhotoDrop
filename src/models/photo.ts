@@ -36,16 +36,8 @@ const photo = class Photo {
         return db.execute(`SELECT * FROM photo WHERE photo.album_id = ?`, [album_id]);
     }
 
-    static updatePhoto(photo_name: string, photo_id: string) {
-        return db.execute(`UPDATE photo SET photo.photo_name = ? WHERE photo.id = ?`, [photo_name, photo_id]);
-    }
-
     static getPhotoById(photo_id: string) {
         return db.execute(`SELECT * FROM photo WHERE photo.id = ?`, [photo_id]);
-    }
-
-    static deletePhotoById(photo_id: string) {
-        return db.execute(`DELETE FROM photo WHERE photo.id = ?`, [photo_id]);
     }
 };
 

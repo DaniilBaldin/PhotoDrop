@@ -3,6 +3,7 @@ import { Response } from 'express';
 
 import s3Upload from '../../services/s3Upload';
 import s3UploadHeic from '../../services/s3UploadHeic';
+import Photo from '../../models/photo';
 
 const uploadPhotos = async (req: any, res: Response) => {
     try {
@@ -15,9 +16,9 @@ const uploadPhotos = async (req: any, res: Response) => {
                 await s3UploadHeic(e, album_id);
             }
         });
-        // res.status(200).json('Saved!');
+        const photos = await Photo.getPhotos(album_id);
         res.status(200).json({
-            data: 'Saved!',
+            data: photos[0],
             success: true,
         });
     } catch (err) {

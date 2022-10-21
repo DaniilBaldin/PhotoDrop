@@ -15,7 +15,6 @@ const uploadPhoto = async (req: any, res: Response) => {
                 await s3UploadHeic(e, album_id);
             }
         });
-        // res.status(200).json('Saved!');
         res.status(200).json({
             data: 'Saved!',
             success: true,

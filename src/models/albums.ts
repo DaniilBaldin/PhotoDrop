@@ -46,28 +46,6 @@ const albums = class Albums {
     static getAlbumById(id: number, person_id: number) {
         return db.execute(`SELECT * FROM albums WHERE albums.id = ? AND albums.person_id = ?`, [id, person_id]);
     }
-
-    static updateAlbum(
-        album_logo: string,
-        album_name: string,
-        album_location: string,
-        date: string,
-        id: number,
-        person_id: number
-    ) {
-        return db.execute(
-            `UPDATE albums SET albums.album_logo = ?,
-                                albums.album_name = ?,
-                                albums.album_location = ?,
-                                albums.date = ?
-                                WHERE albums.id = ? AND albums.person_id = ?`,
-            [album_logo, album_name, album_location, date, id, person_id]
-        );
-    }
-
-    static deleteAlbumById(id: number, person_id: number) {
-        return db.execute(`DELETE FROM albums WHERE albums.id = ? AND albums.person_id = ?`, [id, person_id]);
-    }
 };
 
 export default albums;

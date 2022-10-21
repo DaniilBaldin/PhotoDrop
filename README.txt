@@ -22,14 +22,7 @@ Service for exchange photos between photographer and client based on AWS S3 serv
     Get all albums in JSON format. Admin must be authorized. 
 
 // method: GET - https://photodrop-app-1.herokuapp.com/albums/<album_id> 
-    Get album by album id in JSON format. Admin must be authorized.
-
-// method: PUT - https://photodrop-app-1.herokuapp.com/album
-    Update album by album id in JSON format. Admin must be authorized. 
-    Json params (id, album_logo?, album_name?, album_location?, date?) 
-
-// method: DELETE - https://photodrop-app-1.herokuapp.com/albums/<album_id> 
-    Delete album by album id. Admin must be authorized. 
+    Get album by album id in JSON format. Admin must be authorized. Id in params.
     
     
                 PHOTO    
@@ -41,20 +34,10 @@ Service for exchange photos between photographer and client based on AWS S3 serv
     Upload multiple photos. Admin must be authorized.      
 
 // method: GET - https://photodrop-app-1.herokuapp.com/photos/:id 
-    Get photos by album_id. Admin must be authorized.
+    Get photos by album_id. Admin must be authorized. Id in params.
 
 // method: GET - https://photodrop-app-1.herokuapp.com/photo 
     Get photo by photo_id. Admin must be authorized.
     Id in request body({
     "photo_id": "31"
 })
-
-// method: PUT - https://photodrop-app-1.herokuapp.com/photo 
-    Get photo name by photo_id. Admin must be authorized.
-    Id and name in request body({
-    "photo_id": "31",
-    "photo_name": "photo"
-})
-
-// method: DELETE - https://photodrop-app-1.herokuapp.com/photo/:id 
-    DELETE photo by photo_id. Admin must be authorized.

@@ -8,7 +8,6 @@ const getPhotos = async (req: InfoRequest, res: Response) => {
     try {
         const album_id = req.params.id;
         const photo = await Photo.getPhotos(album_id);
-        // res.status(200).json(photo[0]);
         res.status(200).json({
             data: photo[0],
             success: true,

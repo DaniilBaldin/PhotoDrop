@@ -12,14 +12,6 @@ const admin = class Admin {
         this.dateCreated = dateCreated;
     }
 
-    // save() {
-    //     return db.execute('INSERT INTO adminusers (user, password, dateCreated) VALUES (?, ?, ?)', [
-    //         this.user,
-    //         this.password,
-    //         this.dateCreated,
-    //     ]);
-    // }
-
     static save(user: string, password: string, dateCreated: string) {
         return db.execute('INSERT INTO adminusers (user, password, dateCreated) VALUES (?, ?, ?)', [
             user,
@@ -37,6 +29,10 @@ const admin = class Admin {
 
     static findOne(id: number) {
         return db.execute(`SELECT * FROM adminusers WHERE adminusers.id = ?`, [id]);
+    }
+
+    static findUser(user: string) {
+        return db.execute(`SELECT * FROM adminusers WHERE adminusers.user = ?`, [user]);
     }
 };
 
