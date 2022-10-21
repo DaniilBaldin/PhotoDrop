@@ -7,6 +7,7 @@ import InfoRequest from '../../interface/albumsInterface';
 const createClient = async (req: InfoRequest, res: Response) => {
     try {
         const { client_name, phone_number } = req.body;
+        const album_id = req.person.id as any;
         Client.getClientByNumber(phone_number).then((result) => {
             const resultParsed = JSON.parse(JSON.stringify(result));
             const user = {
@@ -15,7 +16,7 @@ const createClient = async (req: InfoRequest, res: Response) => {
             };
             switch (true) {
                 case resultParsed[0].length === 0:
-                    Client.save(client_name, phone_number).then(() => {
+                    Client.save(client_name, phone_number, album_id).then(() => {
                         res.status(201).json({
                             data: user,
                             success: true,
