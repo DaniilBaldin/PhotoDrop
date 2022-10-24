@@ -3,30 +3,30 @@ import db from '../utils/databaseConnect';
 const photo = class Photo {
     photo_id: string;
     photo_logo: string;
-    photo_name: string;
+    client_name: string;
     photo_url: string;
     album_id: string;
     date: string;
     constructor(
         photo_id: string,
         photo_logo: string,
-        photo_name: string,
+        client_name: string,
         photo_url: string,
         album_id: string,
         date: string
     ) {
         this.photo_id = photo_id;
         this.photo_logo = photo_logo;
-        this.photo_name = photo_name;
+        this.client_name = client_name;
         this.photo_url = photo_url;
         this.album_id = album_id;
         this.date = date;
     }
 
-    static save(photo_logo: string, photo_name: string, photo_url: string, album_id: number) {
-        return db.execute('INSERT INTO photo (photo_logo, photo_name, photo_url, album_id) VALUES (?, ?, ?, ?)', [
+    static save(photo_logo: string, client_name: string, photo_url: string, album_id: number) {
+        return db.execute('INSERT INTO photo (photo_logo, client_name, photo_url, album_id) VALUES (?, ?, ?, ?)', [
             photo_logo,
-            photo_name,
+            client_name,
             photo_url,
             album_id,
         ]);
