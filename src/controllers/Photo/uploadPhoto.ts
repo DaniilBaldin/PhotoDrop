@@ -6,6 +6,7 @@ import s3UploadHeic from '../../services/s3UploadHeic';
 
 const uploadPhoto = async (req: any, res: Response) => {
     try {
+        console.log(req) 
         const { album_id } = req.body;
         const files = req.files;
         files.forEach(async (e: any) => {
