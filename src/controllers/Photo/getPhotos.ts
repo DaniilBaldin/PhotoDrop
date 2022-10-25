@@ -9,15 +9,25 @@ const getPhotos = async (req: InfoRequest, res: Response) => {
     try {
         const person_id = req.person.id;
         const album_id = req.params.id;
-        Photo.getPhotos(album_id).then(async (result) => {
-            const photoParsed = JSON.parse(JSON.stringify(result[0]));
-            const photo_logo = photoParsed[0].photo_logo;
-            await Album.updateAlbum(photo_logo, album_id, person_id);
-            res.status(200).json({
-                data: result[0],
-                success: true,
+        Photo.getPhotos(album_id)
+            .then(async (result) => {
+                console.log(result[0]);
+                const photoParsed = JSON.parse(JSON.stringify(result[0]));
+                const photo_logo = photoParsed[0].photo_logo;
+                await Album.updateAlbum(photo_logo, album_id, person_id);
+                res.status(200).json({
+                    data: result[0],
+                    success: true,
+                });
+            })
+            .catch((err) => {
+                res.json({
+                    error: {
+                        message: (err as Error).message,
+                    },
+                    success: false,
+                });
             });
-        });
         // const photo = await Photo.getPhotos(album_id);
         // const photoParsed = JSON.parse(JSON.stringify(photo[0]));
         // const photo_logo = photoParsed[0].photo_logo;
