@@ -7,14 +7,14 @@ import Photo from '../../models/photo';
 
 const uploadPhotos = async (req: any, res: Response) => {
     try {
-        console.log(req);
         const { album_id } = req.body;
+        const body = req.body;
         const files = req.files;
         files.forEach(async (e: any) => {
             if (e.originalname.split('.').reverse()[0] !== 'heic') {
-                await s3Upload(e, album_id);
+                await s3Upload(e, body);
             } else {
-                await s3UploadHeic(e, album_id);
+                await s3UploadHeic(e, body);
             }
         });
         const photos = await Photo.getPhotos(album_id);
