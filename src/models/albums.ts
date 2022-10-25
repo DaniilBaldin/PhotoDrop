@@ -46,6 +46,14 @@ const albums = class Albums {
     static getAlbumById(id: number, person_id: number) {
         return db.execute(`SELECT * FROM albums WHERE albums.id = ? AND albums.person_id = ?`, [id, person_id]);
     }
+
+    static updateAlbum(album_logo: string, id: string, person_id: number) {
+        return db.execute(`UPDATE albums SET albums.album_logo = ? WHERE albums.id = ? AND albums.person_id = ?`, [
+            album_logo,
+            id,
+            person_id,
+        ]);
+    }
 };
 
 export default albums;
