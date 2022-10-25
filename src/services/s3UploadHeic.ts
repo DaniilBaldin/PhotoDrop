@@ -18,7 +18,7 @@ AWS.config.update(credentials);
 const s3 = new AWS.S3();
 
 const s3UploadHeic = async (files: any, album_id: any) => {
-    const buffer = files.buffer;
+    const buffer = files[0].buffer;
     const convert = async () => {
         const outBuffer = await Convert({
             buffer: buffer,
@@ -51,22 +51,15 @@ const s3UploadHeic = async (files: any, album_id: any) => {
         Body: photo_logo,
         Key: keyThumb,
     };
+    console.log(params, paramsThumb);
 
     s3.putObject(params as any).promise();
     s3.putObject(paramsThumb as any).promise();
-    const photo_name = files.originalname;
+    const client = files[1];
     const photo_url = `https://${BUCKET}.s3.amazonaws.com/${params.Key}`;
     const thumb_url = `https://${BUCKET}.s3.amazonaws.com/${paramsThumb.Key}`;
     const id = album_id || 'Default';
-    const result = await Photo.save(thumb_url, photo_name, photo_url, id);
-    const resultParsed = JSON.parse(JSON.stringify(result));
-    const photo_id = resultParsed[0].insertId;
-    return {
-        photo_id: photo_id,
-        photo_logo: thumb_url,
-        photo_url: photo_url,
-        album_id: album_id,
-    };
+    await Photo.save(thumb_url, client, photo_url, id);
 };
 
 export default s3UploadHeic;

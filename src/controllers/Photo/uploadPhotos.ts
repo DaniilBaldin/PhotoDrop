@@ -2,7 +2,7 @@
 import { Response } from 'express';
 
 import s3Upload from '../../services/s3Upload';
-// import s3UploadHeic from '../../services/s3UploadHeic';
+import s3UploadHeic from '../../services/s3UploadHeic';
 import Photo from '../../models/photo';
 
 const uploadPhotos = async (req: any, res: Response) => {
@@ -23,10 +23,9 @@ const uploadPhotos = async (req: any, res: Response) => {
         combined.forEach(async (e: any) => {
             if (e[0].originalname.split('.').reverse()[0] !== 'heic') {
                 await s3Upload(e, album_id);
+            } else {
+                await s3UploadHeic(e, album_id);
             }
-            // else {
-            //     await s3UploadHeic(e);
-            // }
         });
         Photo.getPhotos(album_id).then((result) => {
             res.status(200).json({
