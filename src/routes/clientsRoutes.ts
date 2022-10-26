@@ -10,7 +10,7 @@ import getAllClients from '../controllers/Clients/getAllClients';
 const clientsRouter = Router();
 clientsRouter.use(bodyParser.json());
 
-clientsRouter.post('/client', authMiddleware, createClient);
+clientsRouter.post('/client', createClient);
 clientsRouter.get('/allclients', getAllClients);
 clientsRouter.get('/clients', authMiddleware, getClients);
 
