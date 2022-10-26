@@ -28,8 +28,8 @@ const client = class Client {
         return db.execute(`SELECT * FROM clients WHERE clients.phone_number = ?`, [phone_number]);
     }
 
-    static getClientById(id: string) {
-        return db.execute(`SELECT * FROM clients WHERE clients.id = ?`, [id]);
+    static getAllClients() {
+        return db.execute(`SELECT * FROM clients`);
     }
 };
 

@@ -5,13 +5,13 @@ import authMiddleware from '../middleware/authMiddleware';
 
 import createClient from '../controllers/Clients/createClient';
 import getClients from '../controllers/Clients/getClients';
-import getClientById from '../controllers/Clients/getClientById';
+import getAllClients from '../controllers/Clients/getAllClients';
 
 const clientsRouter = Router();
 clientsRouter.use(bodyParser.json());
 
 clientsRouter.post('/client', authMiddleware, createClient);
-clientsRouter.get('/client/:id', authMiddleware, getClientById);
+clientsRouter.get('/allclient', authMiddleware, getAllClients);
 clientsRouter.get('/clients', authMiddleware, getClients);
 
 export default clientsRouter;
