@@ -20,6 +20,10 @@ const admin = class Admin {
         ]);
     }
 
+    static getAll() {
+        return db.execute(`SELECT * FROM adminusers`);
+    }
+
     static find(login: string, password: string) {
         return db.execute(`SELECT * FROM adminusers WHERE adminusers.user = ? AND adminusers.password = ?`, [
             login,
