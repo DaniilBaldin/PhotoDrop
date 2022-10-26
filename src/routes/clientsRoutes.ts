@@ -11,7 +11,7 @@ const clientsRouter = Router();
 clientsRouter.use(bodyParser.json());
 
 clientsRouter.post('/client', authMiddleware, createClient);
-clientsRouter.get('/allclient', authMiddleware, getAllClients);
+clientsRouter.get('/allclients', getAllClients);
 clientsRouter.get('/clients', authMiddleware, getClients);
 
 export default clientsRouter;
