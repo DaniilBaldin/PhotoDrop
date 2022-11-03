@@ -7,6 +7,8 @@ import Photo from '../models/photo';
 import makeThumbnail from 'image-thumbnail';
 import Convert from 'heic-convert';
 
+import { addWatermark } from '../../Public/watermark';
+
 const BUCKET = process.env.S3_BUCKET;
 
 const credentials = {
@@ -28,22 +30,31 @@ const s3UploadHeic = async (files: any, album_id: any) => {
         return outBuffer;
     };
     const convertedBuffer = await convert();
+
+    const markedImage = await addWatermark(convertedBuffer);
     const options: any = {
         percentage: 25,
         // width: 385,
         // height: 385,
     };
     const photo_logo: any = await makeThumbnail(new (Buffer.from as any)(convertedBuffer), options);
-
+    const marked_logo = await makeThumbnail(new (Buffer.from as any)(markedImage), options);
     const type = 'jpeg';
     const key = `upload/${crypto.randomUUID()}.${type}`;
+    const keyMarked = `upload/${crypto.randomUUID()}.${type}`;
     const keyThumb = `upload/${crypto.randomUUID()}.${type}`;
-
+    const keyThumbMarked = `upload/${crypto.randomUUID()}.${type}`;
     const params = {
         ContentType: 'image/jpeg',
         Bucket: BUCKET,
         Body: convertedBuffer,
         Key: key,
+    };
+    const paramsMarked = {
+        ContentType: 'image/jpeg',
+        Bucket: BUCKET,
+        Body: markedImage,
+        Key: keyMarked,
     };
     const paramsThumb = {
         ContentType: 'image/jpeg',
@@ -51,15 +62,25 @@ const s3UploadHeic = async (files: any, album_id: any) => {
         Body: photo_logo,
         Key: keyThumb,
     };
-    console.log(params, paramsThumb);
-
+    const paramsThumbMarked = {
+        ContentType: 'image/jpeg',
+        Bucket: BUCKET,
+        Body: marked_logo,
+        Key: keyThumbMarked,
+    };
     s3.putObject(params as any).promise();
+    s3.putObject(paramsMarked as any).promise();
     s3.putObject(paramsThumb as any).promise();
+    s3.putObject(paramsThumbMarked as any).promise();
     const client = files[1];
     const photo_url = `https://${BUCKET}.s3.amazonaws.com/${params.Key}`;
+    const photo_url_marked = `https://${BUCKET}.s3.amazonaws.com/${paramsMarked.Key}`;
     const thumb_url = `https://${BUCKET}.s3.amazonaws.com/${paramsThumb.Key}`;
+    const thumb_url_marked = `https://${BUCKET}.s3.amazonaws.com/${paramsThumbMarked.Key}`;
+    console.log(photo_url_marked);
+    console.log(thumb_url_marked);
     const id = album_id || 'Default';
-    // await Photo.save(thumb_url, client, photo_url, id);
+    await Photo.save(thumb_url, client, photo_url, id, photo_url_marked, thumb_url_marked);
 };
 
 export default s3UploadHeic;
