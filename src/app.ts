@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, '../', '/Public')));
 app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
-    res.setTimeout(1500);
+    res.setTimeout(2000);
     next();
 });
 
