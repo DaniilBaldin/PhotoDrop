@@ -15,6 +15,8 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+app.use(express.static(path.join(__dirname, '../', '/Public')));
+
 app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
@@ -39,8 +41,6 @@ app.use(
         optionsSuccessStatus: 204,
     })
 );
-
-app.use(express.static(path.join(__dirname, '../', '/Public')));
 
 app.get('/', (req, res) => {
     res.send('Hello there! General Kenobi!');
