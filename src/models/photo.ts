@@ -6,30 +6,38 @@ const photo = class Photo {
     client_name: string;
     photo_url: string;
     album_id: string;
-    date: string;
+    marked_url: string;
+    marked_logo: string;
     constructor(
         photo_id: string,
         photo_logo: string,
         client_name: string,
         photo_url: string,
         album_id: string,
-        date: string
+        marked_url: string,
+        marked_logo: string
     ) {
         this.photo_id = photo_id;
         this.photo_logo = photo_logo;
         this.client_name = client_name;
         this.photo_url = photo_url;
         this.album_id = album_id;
-        this.date = date;
+        this.marked_url = marked_url;
+        this.marked_logo = marked_logo;
     }
 
-    static save(photo_logo: string, client_name: string, photo_url: string, album_id: number) {
-        return db.execute('INSERT INTO photo (photo_logo, client_name, photo_url, album_id) VALUES (?, ?, ?, ?)', [
-            photo_logo,
-            client_name,
-            photo_url,
-            album_id,
-        ]);
+    static save(
+        photo_logo: string,
+        client_name: string,
+        photo_url: string,
+        album_id: number,
+        marked_url: string,
+        marked_logo: string
+    ) {
+        return db.execute(
+            'INSERT INTO photo (photo_logo, client_name, photo_url, album_id, marked_url, marked_logo) VALUES (?, ?, ?, ?, ?, ?)',
+            [photo_logo, client_name, photo_url, album_id, marked_url, marked_logo]
+        );
     }
 
     static getPhotos(album_id: string) {

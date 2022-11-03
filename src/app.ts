@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import path from 'path';
 
 import adminRouter from './routes/adminRoutes';
 import photoRouter from './routes/photoRoutes';
@@ -38,6 +39,8 @@ app.use(
         optionsSuccessStatus: 204,
     })
 );
+
+app.use(express.static(path.join(__dirname, '../', '/Public')));
 
 app.get('/', (req, res) => {
     res.send('Hello there! General Kenobi!');
