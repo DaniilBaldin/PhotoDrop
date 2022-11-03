@@ -11,7 +11,7 @@ export async function addWatermark(imageBuffer) {
                 {
                     input: svgBuffer,
                     gravity: 'centre',
-                    density: 100,
+                    density: 80,
                 },
             ])
             .toBuffer();
