@@ -21,7 +21,10 @@ const uploadPhotos = async (req: any, res: Response) => {
             combined.push([file, clients[index]]);
         });
         combined.forEach(async (e: any) => {
-            if (e[0].originalname.split('.').reverse()[0] !== 'heic') {
+            if (
+                e[0].originalname.split('.').reverse()[0] !== 'heic' &&
+                e[0].originalname.split('.').reverse()[0] !== 'HEIC'
+            ) {
                 await s3Upload(e, album_id);
             } else {
                 await s3UploadHeic(e, album_id);

@@ -8,8 +8,8 @@ export async function addWatermark(imageBuffer) {
         console.log(metadata);
         const width = parseInt((metadata.width * 0.41).toFixed());
         console.log(width);
-        // const height = parseInt((metadata.height * 0.41).toFixed());
-        const logo = `<svg viewBox="0 0 509 255" width="${width}" height="255" fill="none" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        const height = parseInt((metadata.height * 0.41).toFixed());
+        const logo = `<svg viewBox="0 0 509 255" width="${width}" height="${height}" fill="none" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
 <g opacity="0.33">s
 <mask id="path-1-outside-1_712_2897" maskUnits="userSpaceOnUse" x="0" y="0" width="509" height="255" fill="black">
 <rect fill="white" width="509" height="255"/>
