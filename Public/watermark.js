@@ -4,6 +4,8 @@ import logo from './PhotoDropLogo';
 
 export async function addWatermark(imageBuffer) {
     try {
+        const metadata = await sharp(imageBuffer).metadata();
+        console.log(metadata);
         const svgBuffer = Buffer.from(logo);
         console.log(svgBuffer);
         const image = await sharp(imageBuffer)
