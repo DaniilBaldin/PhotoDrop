@@ -31,12 +31,13 @@ const s3Upload = async (files: any, album_id: any) => {
     const marked_logo = await makeThumbnail(new (Buffer.from as any)(markedImage), options);
     const type = files[0].originalname.split('.')[1];
     const key = `upload/${crypto.randomUUID()}.${type}`;
+    const name = key.split('.').reverse()[1].split('/')[1];
     const keyMarked = `upload/${crypto.randomUUID()}.${type}`;
     const keyThumb = `upload/${crypto.randomUUID()}.${type}`;
     const keyThumbMarked = `upload/${crypto.randomUUID()}.${type}`;
     const params = {
         // ContentType: files[0].mimetype,
-        ContentDisposition: 'attachment;filename=image.jpg',
+        ContentDisposition: `attachment;filename=${name}.jpg`,
         Bucket: BUCKET,
         Body: files[0].buffer,
         Key: key,
