@@ -36,24 +36,25 @@ const s3Upload = async (files: any, album_id: any) => {
     const keyThumbMarked = `upload/${crypto.randomUUID()}.${type}`;
     const params = {
         // ContentType: files[0].mimetype,
+        ContentDisposition: 'attachment;filename=image.jpg',
         Bucket: BUCKET,
         Body: files[0].buffer,
         Key: key,
     };
     const paramsMarked = {
-        // ContentType: files[0].mimetype,
+        ContentType: files[0].mimetype,
         Bucket: BUCKET,
         Body: markedImage,
         Key: keyMarked,
     };
     const paramsThumb = {
-        // ContentType: files[0]?.mimetype,
+        ContentType: files[0]?.mimetype,
         Bucket: BUCKET,
         Body: photo_logo,
         Key: keyThumb,
     };
     const paramsThumbMarked = {
-        // ContentType: files[0]?.mimetype,
+        ContentType: files[0]?.mimetype,
         Bucket: BUCKET,
         Body: marked_logo,
         Key: keyThumbMarked,
@@ -64,6 +65,7 @@ const s3Upload = async (files: any, album_id: any) => {
     s3.putObject(paramsThumbMarked as any).promise();
     const client = files[1] || 'default';
     const photo_url = `https://${BUCKET}.s3.amazonaws.com/${params.Key}`;
+    console.log(photo_url);
     const photo_url_marked = `https://${BUCKET}.s3.amazonaws.com/${paramsMarked.Key}`;
     const thumb_url = `https://${BUCKET}.s3.amazonaws.com/${paramsThumb.Key}`;
     const thumb_url_marked = `https://${BUCKET}.s3.amazonaws.com/${paramsThumbMarked.Key}`;
