@@ -19,7 +19,6 @@ AWS.config.update(credentials);
 const s3 = new AWS.S3();
 
 const s3Upload = async (files: any, album_id: any) => {
-    console.log(files);
     const options: any = {
         percentage: 25,
         // width: 385,

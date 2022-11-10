@@ -79,8 +79,6 @@ const s3UploadHeic = async (files: any, album_id: any) => {
     const photo_url_marked = `https://${BUCKET}.s3.amazonaws.com/${paramsMarked.Key}`;
     const thumb_url = `https://${BUCKET}.s3.amazonaws.com/${paramsThumb.Key}`;
     const thumb_url_marked = `https://${BUCKET}.s3.amazonaws.com/${paramsThumbMarked.Key}`;
-    console.log(photo_url_marked);
-    console.log(thumb_url_marked);
     const id = album_id || 'Default';
     await Photo.save(thumb_url, client, photo_url, id, photo_url_marked, thumb_url_marked);
 };

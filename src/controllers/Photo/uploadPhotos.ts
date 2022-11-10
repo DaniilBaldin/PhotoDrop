@@ -21,12 +21,17 @@ const uploadPhotos = async (req: any, res: Response) => {
             combined.push([file, clients[index]]);
         });
         combined.forEach(async (e: any) => {
-            if (e[0].originalname.split('.').reverse()[0] !== 'heic') {
-                await s3Upload(e, album_id);
-            } else if (e[0].originalname.split('.').reverse()[0] !== 'HEIC') {
-                await s3Upload(e, album_id);
-            } else {
-                await s3UploadHeic(e, album_id);
+            const type = e[0].originalname.split('.').reverse()[0];
+            console.log(typeof type);
+            switch (true) {
+                case type !== 'heic':
+                    await s3Upload(e, album_id);
+                    break;
+                case type === 'HEIC':
+                    await s3Upload(e, album_id);
+                    break;
+                default:
+                    await s3UploadHeic(e, album_id);
             }
         });
         Photo.getPhotos(album_id).then((result) => {
