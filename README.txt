@@ -45,17 +45,7 @@ Service for exchange photos between photographer and client based on AWS S3 serv
 
 
                 CLIENT    
-
-// method: POST - https://photodrop-app-1.herokuapp.com/client 
-    Create new client. Admin must be authorized.
-    Request body: {
-    "client_name":"test",
-    "phone_number": "0671234566"   
-    }   
+ 
 
 // method: GET - https://photodrop-app-1.herokuapp.com/clients 
-    Get all clients for logged Admin. Admin must be authorized.
-
-// method: GET - https://photodrop-app-1.herokuapp.com/client/:id 
-    Get client by client_id. Admin must be authorized.
-    Id in request params
+    Get all clients. Admin must be authorized.
