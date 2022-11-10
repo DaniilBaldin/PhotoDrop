@@ -41,11 +41,13 @@ const s3UploadHeic = async (files: any, album_id: any) => {
     const marked_logo = await makeThumbnail(new (Buffer.from as any)(markedImage), options);
     const type = 'jpeg';
     const key = `upload/${crypto.randomUUID()}.${type}`;
+    const name = key.split('.').reverse()[1].split('/')[1];
     const keyMarked = `upload/${crypto.randomUUID()}.${type}`;
     const keyThumb = `upload/${crypto.randomUUID()}.${type}`;
     const keyThumbMarked = `upload/${crypto.randomUUID()}.${type}`;
     const params = {
-        ContentType: 'image/jpeg',
+        // ContentType: 'image/jpeg',
+        ContentDisposition: `attachment;filename=${name}.jpg`,
         Bucket: BUCKET,
         Body: convertedBuffer,
         Key: key,
