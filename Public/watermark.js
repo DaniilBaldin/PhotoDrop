@@ -1,13 +1,10 @@
 import sharp from 'sharp';
 import { Buffer } from 'buffer';
-// import logo from './PhotoDropLogo';
 
 export async function addWatermark(imageBuffer) {
     try {
         const metadata = await sharp(imageBuffer).metadata();
-        console.log(metadata);
         const width = parseInt((metadata.width * 0.41).toFixed());
-        console.log(width);
         const height = parseInt((metadata.height * 0.41).toFixed());
         const logo = `<svg viewBox="0 0 509 255" width="${width}" height="${height}" fill="none" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
 <g opacity="0.33">s
@@ -54,7 +51,6 @@ export async function addWatermark(imageBuffer) {
 </svg>
 `;
         const svgBuffer = Buffer.from(logo);
-        console.log(svgBuffer);
         const image = await sharp(imageBuffer)
             .composite([
                 {

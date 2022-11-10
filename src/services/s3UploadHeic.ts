@@ -34,8 +34,6 @@ const s3UploadHeic = async (files: any, album_id: any) => {
     const markedImage = await addWatermark(convertedBuffer);
     const options: any = {
         percentage: 25,
-        // width: 385,
-        // height: 385,
     };
     const photo_logo: any = await makeThumbnail(new (Buffer.from as any)(convertedBuffer), options);
     const marked_logo = await makeThumbnail(new (Buffer.from as any)(markedImage), options);
@@ -46,7 +44,6 @@ const s3UploadHeic = async (files: any, album_id: any) => {
     const keyThumb = `upload/${crypto.randomUUID()}.${type}`;
     const keyThumbMarked = `upload/${crypto.randomUUID()}.${type}`;
     const params = {
-        // ContentType: 'image/jpeg',
         ContentDisposition: `attachment;filename=${name}.jpg`,
         Bucket: BUCKET,
         Body: convertedBuffer,

@@ -22,7 +22,6 @@ const uploadPhotos = async (req: any, res: Response) => {
         });
         combined.forEach(async (e: any) => {
             const type = e[0].originalname.split('.').reverse()[0];
-            console.log(typeof type);
             switch (true) {
                 case type !== 'heic':
                     await s3Upload(e, album_id);

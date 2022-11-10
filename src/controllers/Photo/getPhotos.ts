@@ -11,7 +11,6 @@ const getPhotos = async (req: InfoRequest, res: Response) => {
         const album_id = req.params.id;
         Photo.getPhotos(album_id)
             .then(async (result) => {
-                console.log(result[0]);
                 const photoParsed = JSON.parse(JSON.stringify(result[0]));
                 if (photoParsed.length) {
                     const photo_logo = photoParsed[0].photo_logo;
@@ -30,15 +29,6 @@ const getPhotos = async (req: InfoRequest, res: Response) => {
                     success: false,
                 });
             });
-        // const photo = await Photo.getPhotos(album_id);
-        // const photoParsed = JSON.parse(JSON.stringify(photo[0]));
-        // const photo_logo = photoParsed[0].photo_logo;
-        // console.log(photo_logo);
-        // await Album.updateAlbum(photo_logo, album_id, person_id);
-        // res.status(200).json({
-        //     data: photo[0],
-        //     success: true,
-        // });
     } catch (err) {
         res.json({
             error: {

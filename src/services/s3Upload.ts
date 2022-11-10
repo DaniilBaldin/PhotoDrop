@@ -21,8 +21,6 @@ const s3 = new AWS.S3();
 const s3Upload = async (files: any, album_id: any) => {
     const options: any = {
         percentage: 25,
-        // width: 385,
-        // height: 385,
     };
     const buffer = files[0].buffer;
     const markedImage = await addWatermark(buffer);
@@ -35,7 +33,6 @@ const s3Upload = async (files: any, album_id: any) => {
     const keyThumb = `upload/${crypto.randomUUID()}.${type}`;
     const keyThumbMarked = `upload/${crypto.randomUUID()}.${type}`;
     const params = {
-        // ContentType: files[0].mimetype,
         ContentDisposition: `attachment;filename=${name}.jpg`,
         Bucket: BUCKET,
         Body: files[0].buffer,
@@ -65,12 +62,9 @@ const s3Upload = async (files: any, album_id: any) => {
     s3.putObject(paramsThumbMarked as any).promise();
     const client = files[1] || 'default';
     const photo_url = `https://${BUCKET}.s3.amazonaws.com/${params.Key}`;
-    console.log(photo_url);
     const photo_url_marked = `https://${BUCKET}.s3.amazonaws.com/${paramsMarked.Key}`;
     const thumb_url = `https://${BUCKET}.s3.amazonaws.com/${paramsThumb.Key}`;
     const thumb_url_marked = `https://${BUCKET}.s3.amazonaws.com/${paramsThumbMarked.Key}`;
-    console.log(photo_url_marked);
-    console.log(thumb_url_marked);
     const id = album_id || 'Default';
     await Photo.save(thumb_url, client, photo_url, id, photo_url_marked, thumb_url_marked);
 };
